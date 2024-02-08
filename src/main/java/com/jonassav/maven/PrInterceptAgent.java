@@ -12,7 +12,7 @@ public class PrInterceptAgent {
                 .type(ElementMatchers.any()) // Match all classes
                 .transform(new AgentBuilder.Transformer.ForAdvice()
                         .include(PrintInterceptor.class.getClassLoader())
-                        .advice(ElementMatchers.named("println"), PrintInterceptor.class.getName()))
+                        .advice(ElementMatchers.named("main"), PrintInterceptor.class.getName()))
                 .installOn(instrumentation);
     }
 
