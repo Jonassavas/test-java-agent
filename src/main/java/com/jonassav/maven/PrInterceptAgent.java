@@ -3,52 +3,38 @@ package com.jonassav.maven;
 import net.bytebuddy.agent.builder.AgentBuilder;
 import net.bytebuddy.asm.Advice;
 import net.bytebuddy.asm.MemberSubstitution;
-import net.bytebuddy.description.type.TypeDescription;
-import net.bytebuddy.dynamic.DynamicType;
 import net.bytebuddy.implementation.FixedValue;
-import net.bytebuddy.implementation.MethodCall;
-import net.bytebuddy.implementation.MethodDelegation;
-import net.bytebuddy.implementation.SuperMethodCall;
 import net.bytebuddy.implementation.bind.annotation.AllArguments;
-import net.bytebuddy.implementation.bind.annotation.Origin;
-import net.bytebuddy.implementation.bind.annotation.RuntimeType;
-import net.bytebuddy.implementation.bind.annotation.SuperCall;
-import net.bytebuddy.matcher.ElementMatcher;
 import net.bytebuddy.matcher.ElementMatchers;
-import net.bytebuddy.utility.JavaModule;
 
-import java.io.PrintStream;
+import javax.swing.text.Element;
 import java.lang.instrument.Instrumentation;
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.concurrent.Callable;
 
-import static net.bytebuddy.matcher.ElementMatchers.*;
+import static net.bytebuddy.matcher.ElementMatchers.named;
+import static net.bytebuddy.matcher.ElementMatchers.takesArgument;
 
 public class PrInterceptAgent {
 
-    public static void premain(String arguments,
-                               Instrumentation instrumentation) throws NoSuchMethodException, NoSuchFieldException{
-        Method m1 = PrintStream.class.getMethod("println", String.class);
-        Field m2 = System.class.getField("out");
+    public static void premain(String agentArgs, Instrumentation instrumentation) throws NoSuchMethodException {
 
-            new AgentBuilder.Default()
-                    .type(ElementMatchers.any())
-                    .transform((builder, type, classLoader, module, protectionDomain) ->
-                            builder.method(any()).intercept(MethodCall.invoke(
-                                            m1)
-                                    .onField(m2)
-                                    .with("Hello World")
-                                    .andThen(SuperMethodCall.INSTANCE)))
-                    .installOn(instrumentation);
+        Method m1 = PrintInterceptor.class.getMethod("intercept", String.class);
 
+        new AgentBuilder.Default()
+                .type(ElementMatchers.any()) // Match all classes
+                .transform((builder, type, classLoader, module, protectionDomain) -> builder
+                        .visit(MemberSubstitution.strict()
+                                .method(named("println"))
+                                .stub()
+                                .on(ElementMatchers.any()))).installOn(instrumentation);
     }
-//@Advice.Argument(value = 0, readOnly = false) Object arg
-//    public static class PrintInterceptor {
-//        @Advice.OnMethodEnter
-//        static void intercept() {
-//            System.out.println("I'm an agent");
-//
-//        }
-//    }
+
+
+
+    public static class PrintInterceptor {
+        public static void intercept(String message) {
+            String modifiedMessage = "Modified: " + message;
+            System.out.println(modifiedMessage);
+        }
+    }
 }
