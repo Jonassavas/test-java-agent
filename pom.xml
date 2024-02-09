@@ -43,6 +43,8 @@
                                        "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                     <manifestEntries>
                       <Premain-Class>com.jonassav.maven.PrInterceptAgent</Premain-Class>
+                      <Can-Retransform-Classes>true</Can-Retransform-Classes>
+                      <Can-Redefine-Classes>true</Can-Redefine-Classes>
                       <Build-Number>1.0</Build-Number>
                     </manifestEntries>
                   </transformer>
