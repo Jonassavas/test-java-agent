@@ -16,25 +16,20 @@ import static net.bytebuddy.matcher.ElementMatchers.takesArgument;
 
 public class PrInterceptAgent {
 
-    public static void premain(String agentArgs, Instrumentation instrumentation) throws NoSuchMethodException {
-
-        Method m1 = PrintInterceptor.class.getMethod("intercept", String.class);
-
+    public static void premain(String agentArgs, Instrumentation instrumentation) {
         new AgentBuilder.Default()
-                .type(ElementMatchers.any()) // Match all classes
-                .transform((builder, type, classLoader, module, protectionDomain) -> builder
-                        .visit(MemberSubstitution.strict()
-                                .method(named("println"))
-                                .stub()
-                                .on(ElementMatchers.any()))).installOn(instrumentation);
+                .type(ElementMatchers.nameContains("Test")) // Match all classes
+                .transform((builder, type, classLoader, module, protectionDomain) ->
+                        builder.visit(Advice.to(PrintInterceptor.class).on(ElementMatchers.takesArgument(0, String.class))))
+                .installOn(instrumentation);
     }
 
-
-
     public static class PrintInterceptor {
-        public static void intercept(String message) {
+        @Advice.OnMethodEnter
+        public static void intercept(@Advice.Argument(value = 0, readOnly = false) String message) {
             String modifiedMessage = "Modified: " + message;
             System.out.println(modifiedMessage);
+            message = modifiedMessage;
         }
     }
 }
