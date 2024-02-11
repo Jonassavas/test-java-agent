@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-21.0.1\bin"/>
-    <property name="sun.java.command" value="C:\Users\jonas\AppData\Local\Temp\surefire13629031932148929950\surefirebooter-20240210172949823_3.jar C:\Users\jonas\AppData\Local\Temp\surefire13629031932148929950 2024-02-10T17-29-49_728-jvmRun1 surefire-20240210172949823_1tmp surefire_0-20240210172949823_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\jonas\AppData\Local\Temp\surefire6273681348340409259\surefirebooter-20240211141319627_3.jar C:\Users\jonas\AppData\Local\Temp\surefire6273681348340409259 2024-02-11T14-13-19_542-jvmRun1 surefire-20240211141319627_1tmp surefire_0-20240211141319627_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\kthcs\MEX\test-java-agent\target\test-classes;C:\kthcs\MEX\test-java-agent\target\classes;C:\Users\jonas\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\jonas\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\jonas\.m2\repository\net\bytebuddy\byte-buddy\1.14.11\byte-buddy-1.14.11.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\jonas\AppData\Local\Temp\surefire13629031932148929950\surefirebooter-20240210172949823_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\jonas\AppData\Local\Temp\surefire6273681348340409259\surefirebooter-20240211141319627_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.1+12-LTS-29"/>
@@ -58,5 +58,5 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="shouldAnswerWithTrue" classname="com.jonassav.maven.AppTest" time="0.002"/>
+  <testcase name="shouldAnswerWithTrue" classname="com.jonassav.maven.AppTest" time="0.004"/>
 </testsuite>

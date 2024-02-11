@@ -13,7 +13,7 @@ public class PrInterceptAgent {
 
     public static void premain(String agentArgs, Instrumentation instrumentation) {
         new AgentBuilder.Default().ignore(none())
-                .type(ElementMatchers.nameContains("Test")) // Match all classes
+                .type(ElementMatchers.nameContains("Test"))
                 .transform((builder, type, classLoader, module, protectionDomain) ->
                         builder.visit(Advice.to(PrintInterceptor.class).on(ElementMatchers.takesArgument(0, String.class)
                                 .and(ElementMatchers.nameContainsIgnoreCase("print")))))
@@ -23,7 +23,7 @@ public class PrInterceptAgent {
     public static class PrintInterceptor {
         @Advice.OnMethodEnter
         public static void intercept(@Advice.Argument(value = 0, readOnly = false) String message) {
-            message = "AGENT MODIFIED: " + message;
+            message = "AGENT MODIFIED: " + message.replace("the", "no longer the");
         }
     }
 }

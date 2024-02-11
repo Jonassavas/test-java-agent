@@ -1,33 +1,27 @@
 # test-java-agent
 
+I wanted the agent to only change the arguments to `Sytem.out.println` but was only able to remove them completely
+as seen in [this](./test-files/PrInterceptAgentDesired.java) file. Replacing them with something else was unsuccessful.
 
-#### Compile the test and the agent (while in the src directory):
-```
-javac AgentHelloWorld.java Test.java
-```
+This agent instead changes the argument to methods that contain "print" in their name.
 
-#### Create Manifest files to instruct the JVM of the entrypoints in the jar's:
-In MANIFEST.MF (for the agent)
+#### Compile the test and the agent (from the root directory):
 ```
-Premain-Class: AgentHelloWorld
+javac ./test-files/Test.java
 ```
-In Manifest.txt for the test class:
+#### Package the test class in a JAR-file:
 ```
-Main-Class: Test
+jar cfm ./test-files/Test.jar ./test-files/Manifest.txt -C ./test-files/ Test.class
 ```
 
-#### Package them into jar files:
+#### Package the agent:
 ```
-jar cfm Test0.jar Manifest.txt Test.class
-```
-```
-jar cvf Agent0.jar AgentHelloWorld.class
-jar cvmf MANIFEST.MF Agent0.jar AgentHelloWorld.class
+mvn clean package
 ```
 
 #### Running:
 ```
-java -javaagent:Agent0.jar -jar Test0.jar
+java -javaagent:./target/printercept-1.0-shaded.jar -jar ./test-files/Test.jar
 ```
 
 
