@@ -1,4 +1,0 @@
-Manifest-Version: 1.0
-Premain-Class: com.jonassav.maven.PrInterceptAgent
-Agent-Class: com.jonassav.maven.PrInterceptAgent
-Can-Redefine-Classes: true
