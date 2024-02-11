@@ -1,5 +1,9 @@
 public class PrInterceptAgentDesired {
 
+    public static void intercept(String message) {
+        System.out.println("AGENT MODIFIED: " + message);
+    }
+
     public static void premain(String agentArgs, Instrumentation instrumentation) throws NoSuchMethodException {
 
         Method m1 = PrintInterceptor.class.getMethod("intercept", String.class);
@@ -9,7 +13,7 @@ public class PrInterceptAgentDesired {
                 .transform((builder, type, classLoader, module, protectionDomain) -> builder
                         .visit(MemberSubstitution.strict()
                                 .method(named("println"))
-                                .stub() // replaceWith(m1) does not work.
+                                .stub() // replaceWith(m1) and similar 'advice' tests does not work.
                                 .on(ElementMatchers.any()))).installOn(instrumentation);
     }
 }

@@ -3,7 +3,8 @@
 I wanted the agent to only change the arguments to `Sytem.out.println` but was only able to remove them completely
 as seen in [this](./test-files/PrInterceptAgentDesired.java) file. Replacing them with something else was unsuccessful.
 
-This agent instead changes the argument to methods that contain "print" in their name.
+This agent instead changes the argument to methods that contain "print" in their name. The implementation can be found
+in [this](./src/main/java/com/jonassav/maven/PrInterceptAgent.java) file.
 
 #### Compile the test and the agent (from the root directory):
 ```
