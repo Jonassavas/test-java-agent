@@ -21,6 +21,21 @@
       <artifactId>byte-buddy</artifactId>
       <version>1.14.11</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.ow2.asm/asm-tree -->
+    <dependency>
+      <groupId>org.ow2.asm</groupId>
+      <artifactId>asm-tree</artifactId>
+      <version>9.6</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.ow2.asm/asm-util -->
+    <dependency>
+      <groupId>org.ow2.asm</groupId>
+      <artifactId>asm-util</artifactId>
+      <version>9.6</version>
+    </dependency>
+
+
+
 
 
   </dependencies>
